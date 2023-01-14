@@ -10,7 +10,15 @@
       <form method="post" action="/users/image" enctype="multipart/form-data">
         <p>
           <label for="image">Image:</label>
-          <input type="file" name="avatar" id="avatar" />
+          <input
+            type="file"
+            name="avatar"
+            id="avatar"
+            value="<%if (locals.old && old.avatar) {%><%= old.avatar %><%}%>"
+          />
+            <% if (locals.errors && errors.avatar) { %>
+            <div class="error-message"><%= errors.avatar.msg %></div>
+            <% } %>
         </p>
         <p>
           <input type="submit" value="Upload" />

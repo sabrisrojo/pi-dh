@@ -4,7 +4,7 @@ const router = express.Router()
 
 const indexController = require("../controllers/index")
 const usersController = require("../controllers/users")
-const fileUploadController = require("../controllers/fileUpload")
+const imageUploadController = require("../controllers/imageUpload")
 
 router.get("/", indexController.index.get)
 router.post("/", indexController.index.post)

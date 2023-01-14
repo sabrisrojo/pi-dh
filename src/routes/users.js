@@ -4,10 +4,11 @@ const router = express.Router()
 
 const indexController = require("../controllers/index")
 const usersController = require("../controllers/users")
-const fileUploadController = require("../controllers/fileUpload")
+const imageUploadController = require("../controllers/imageUpload")
 
 const validateRegister = require("../utils/validation/register")
 const validateLogin = require("../utils/validation/login")
+const validateImageUpload = require("../utils/validation/imageUpload")
 
 router.get("/login", usersController.login.get)
 
@@ -21,7 +22,8 @@ router.get("/image", usersController.upload.get)
 
 router.post(
   "/image",
-  fileUploadController.uploadAvatarImage,
+  imageUploadController.uploadAvatarImage,
+  validateImageUpload,
   usersController.upload.post
 )
 

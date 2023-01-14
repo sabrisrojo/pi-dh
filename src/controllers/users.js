@@ -48,14 +48,16 @@ const logout = {
 
 const upload = {
   get: function (req, res) {
-    res.render("uploadImage", { title: "Upload Your Image" })
+    res.render("imageUpload", { title: "Upload Your Image" })
   },
   post: function (req, res, next) {
-    const file = req.file
-    if (!file) {
-      const error = new Error("Please upload a file")
-      error.httpStatusCode = 400
-      return next(error)
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) {
+      return res.render("imageUpload", {
+        title: "Upload Your Image",
+        errors: errors.mapped(),
+        old: req.body,
+      })
     }
     res.send(file)
   },
