@@ -14,6 +14,10 @@ const register = {
         old: req.body,
       })
     }
+
+    const { username, email, password } = req.body
+    const encryptedPassword = hashPassword(password)
+
     res.send("POST request to the register")
   },
 }
@@ -32,6 +36,10 @@ const login = {
         old: req.body,
       })
     }
+
+    const { username, password } = req.body
+    const encryptedPassword = hashPassword(password)
+
     res.send("POST request to the login")
   },
 }
