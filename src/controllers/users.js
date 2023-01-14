@@ -59,7 +59,7 @@ const upload = {
         old: req.body,
       })
     }
-    res.send(file)
+    res.send(req.file)
   },
 }
 

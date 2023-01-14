@@ -16,7 +16,7 @@
             id="username"
             value="<%if (locals.old && old.username) {%><%= old.username %><%}%>"
           />
-            <%- if (locals.errors && errors.username) { %>
+            <% if (locals.errors && errors.username) { %>
             <div><%= errors.username.msg %></div>
             <% } %>
         </p>
@@ -28,7 +28,7 @@
             id="email"
             value="<%if (locals.old && old.email) {%><%= old.email %><%}%>"
           />
-            <%- if (locals.errors && errors.email) { %>
+            <% if (locals.errors && errors.email) { %>
             <div><%= errors.email.msg %></div>
             <% } %>
         </p>
@@ -41,7 +41,7 @@
             value="<%if (locals.old && old.password) {%><%= old.password %><%}%>"
           />
             </div>
-            <%- if (locals.errors && errors.password) { %>
+            <% if (locals.errors && errors.password) { %>
             <div><%= errors.password.msg %></div>
             <% } %>
         </p>
