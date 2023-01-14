@@ -10,11 +10,27 @@
       <form method="post" action="/users/login">
         <p>
           <label for="username">Username:</label>
-          <input type="text" name="username" id="username" />
+          <input
+            type="text"
+            name="username"
+            id="username"
+            value="<%if (locals.old && old.username) {%><%= old.username %><%}%>"
+          />
+            <% if (locals.errors && errors.username) { %>
+            <div class="error-message"><%= errors.username.msg %></div>
+            <% } %>
         </p>
         <p>
           <label for="password">Password:</label>
-          <input type="text" name="password" id="password" />
+          <input
+            type="text"
+            name="password"
+            id="password"
+            value="<%if (locals.old && old.password) {%><%= old.password %><%}%>"
+          />
+            <% if (locals.errors && errors.password) { %>
+            <div class="error-message"><%= errors.password.msg %></div>
+            <% } %>
         </p>
         <p>
           <input type="submit" value="Login" />

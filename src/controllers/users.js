@@ -1,11 +1,19 @@
 const express = require("express")
+const { validationResult } = require("express-validator")
 
 const register = {
   get: function (req, res) {
     res.render("register", { title: "Register" })
   },
   post: function (req, res) {
-    console.log(req.body)
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) {
+      return res.render("register", {
+        title: "Register",
+        errors: errors.mapped(),
+        old: req.body,
+      })
+    }
     res.send("POST request to the register")
   },
 }
@@ -16,6 +24,14 @@ const login = {
   },
   post: function (req, res) {
     console.log(req.body)
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) {
+      return res.render("login", {
+        title: "Login",
+        errors: errors.mapped(),
+        old: req.body,
+      })
+    }
     res.send("POST request to the login")
   },
 }
