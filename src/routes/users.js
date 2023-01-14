@@ -1,9 +1,20 @@
-var express = require("express")
-var router = express.Router()
+const path = require("path")
+const express = require("express")
+const router = express.Router()
 
-/* GET users listing. */
-router.get("/", function (req, res, next) {
-  res.render("users", { title: "Users" })
-})
+const usersController = require("../controllers/users")
+const fileUploadController = require("../controllers/fileUpload")
+
+router.get("/login", usersController.login.get)
+
+router.post("/login", usersController.login.post)
+
+router.get("/register", usersController.register.get)
+
+router.post("/register", usersController.register.post)
+
+router.get("/image", usersController.upload.get)
+
+router.post("/image", usersController.upload.post)
 
 module.exports = router

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('./partials/head'); %>
+  </head>
+  <body>
+    <header><%- include('./partials/header'); %></header>
+    <main>
+      <h1><%= title %></h1>
+      <form method="post" action="/users/register">
+        <p>
+          <label for="username">Username:</label>
+          <input type="text" name="username" id="username" />
+        </p>
+        <p>
+          <label for="email">Email:</label>
+          <input type="text" name="email" id="email" />
+        </p>
+        <p>
+          <label for="password">Password:</label>
+          <input type="text" name="password" id="password" />
+        </p>
+        <p>
+          <input type="submit" value="Login" />
+        </p>
+      </form>
+    </main>
+    <footer><%- include('./partials/footer'); %></footer>
+  </body>
+</html>
