@@ -15,6 +15,10 @@ router.post("/register", usersController.register.post)
 
 router.get("/image", usersController.upload.get)
 
-router.post("/image", usersController.upload.post)
+router.post(
+  "/image",
+  fileUploadController.uploadAvatarImage,
+  usersController.upload.post
+)
 
 module.exports = router

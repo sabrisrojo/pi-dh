@@ -14,6 +14,17 @@ const storage = multer.diskStorage({
 })
 const upload = multer({ storage: storage }).single("avatar")
 
-module.exports = {
-  uploadAvatarImage: upload,
+const uploadAvatarImage = (req, res, next) => {
+  upload(req, res, function (err) {
+    if (err instanceof multer.MulterError) {
+      console.log("A Multer error occurred when uploading.")
+      console.log(err)
+    } else if (err) {
+      console.log("An unknown error occurred when uploading.")
+      console.log(err)
+    }
+    next()
+  })
 }
+
+module.exports = { uploadAvatarImage }

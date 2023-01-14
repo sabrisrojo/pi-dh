@@ -35,7 +35,13 @@ const upload = {
     res.render("uploadImage", { title: "Upload Your Image" })
   },
   post: function (req, res, next) {
-    res.send("POST request to the upload")
+    const file = req.file
+    if (!file) {
+      const error = new Error("Please upload a file")
+      error.httpStatusCode = 400
+      return next(error)
+    }
+    res.send(file)
   },
 }
 
