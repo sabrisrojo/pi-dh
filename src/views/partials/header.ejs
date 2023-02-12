@@ -1,21 +1,62 @@
 <nav class="navbar">
   <div class="navbar-flex-div">
-    <div class="navbar-logo-text"><a href="/">DH Projeto Integrador</a></div>
+    <div class="logo">
+      <a href="/"><img src="/images/logo.jpg" alt="avatar" class="avatar" /></a>
+    </div>
+  </div>
+  <div class="navbar-flex-div">
+    <form class="navbar-search-form" action="/product/search" method="get">
+      <input
+        class="navbar-search-input"
+        type="text"
+        name="name"
+        placeholder="Pesquisar..."
+      />
+      <button class="navbar-search-button" type="submit">&#8702;</button>
+    </form>
   </div>
   <div class="navbar-flex-div">
     <ul class="navbar-list">
-      <li class="navbar-list-item">
-        <a class="navbar-list-item-link" href="/">Home</a>
-      </li>
+      <%if (locals.userData) { %>
+      <div class="dropdown">
+        <div class="drop-button-container">
+          <button class="drop-button">
+            <%= locals.userData?.firstName ? `Olá ${userData.firstName}` :
+            'Olá!' %>
+          </button>
+          <div class="drop-button-avatar">
+            <a href="/users/profile">
+              <img
+                src="<%if (locals.userData && userData.avatar) {%><%= userData.avatar %><%}%>"
+                alt="avatar"
+                class="avatar"
+              />
+            </a>
+          </div>
+        </div>
+        <div class="dropdown-content">
+          <a href="/cart">Carrinho</a>
+          <a href="/users/profile">Perfil</a>
+          <a href="/users/history">Histórico</a>
+          <a href="/users/logout">Logout</a>
+        </div>
+      </div>
+      <% } else { %>
       <li class="navbar-list-item">
         <a class="navbar-list-item-link" href="/users/login">Login</a>
       </li>
       <li class="navbar-list-item">
         <a class="navbar-list-item-link" href="/users/register">Register</a>
       </li>
-      <li class="navbar-list-item">
-        <a class="navbar-list-item-link" href="/users/image">Upload</a>
-      </li>
+      <% } %>
     </ul>
   </div>
 </nav>
+
+<script type="text/javascript">
+  function test() {
+    fetch("/session")
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+  }
+</script>
