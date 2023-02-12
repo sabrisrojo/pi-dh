@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('./partials/head'); %>
+    <link href="/stylesheets/index.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <header><%- include('./partials/header'); %></header>
+    <main>
+      <h1>
+        <button class="back-button" onclick="history.back()">&#8701;</button><%=
+        title %>
+      </h1>
+      <h2><%if (locals.category) {%><a></a><%= category %><%}%></h2>
+      <div class="section-heading"></div>
+      <div class="product-container">
+        <%if (locals.data && data.length !== 0) {%> <%
+        data.forEach(function(product) { %>
+        <div class="product-card">
+          <a href="/product/<%= product.id %>">
+            <div class="product-image">
+              <img
+                src="<%= encodeURI(product.imagePath) %>"
+                alt="<%= product.name %>"
+              />
+            </div>
+            <div class="product-name"><span><%= product.name %></span></div></a
+          >
+          <div class="product-price">
+            <span>R$ <%= product.price %></span>
+            <form action="/cart/<%= product.productId %>" method="post">
+              <button class="cart-button" type="submit">Comprar</button>
+            </form>
+          </div>
+        </div>
+        <% });} %>
+      </div>
+      <% if (locals.data && data.length === 0) { %>
+      <div class="no-data-container">
+        <div class="no-data-message">
+          <div>Parece que a sua pesquisa não retornou resultados</div>
+          <div>
+            <small>Tente pesquisar novamente com outras palavras</small>
+          </div>
+        </div>
+      </div>
+      <% } %>
+    </main>
+    <footer><%- include('./partials/footer'); %></footer>
+  </body>
+</html>

@@ -2,12 +2,59 @@
 <html>
   <head>
     <%- include('./partials/head'); %>
+    <link href="/stylesheets/index.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
     <header><%- include('./partials/header'); %></header>
     <main>
-      <div>
-        <h1><%= title %></h1>
+      <h1><%= title %></h1>
+      <div class="section-heading">
+        <h2>Produtos para todos os momentos</h2>
+        <a href="/category" class="link-primary">Ver mais categorias >>></a>
+      </div>
+      <div class="category-container">
+        <%if (locals.categories) {%> <% categories.forEach(function(category) {
+        %>
+        <a href="category/<%= category.name.toLowerCase() %>">
+          <div class="category-banner">
+            <div class="category-image">
+              <img
+                src="<%= encodeURI(category.imagePath) %>"
+                alt="<%= category.name %>"
+              />
+            </div>
+            <div class="category-name">
+              <span><%= category.name %></span>
+            </div>
+          </div>
+        </a>
+        <% });} %>
+      </div>
+      <div class="divider"></div>
+      <div class="section-heading">
+        <h2>Confira nossas melhores ofertas</h2>
+        <a href="/product" class="link-primary">Ver mais produtos >>></a>
+      </div>
+      <div class="product-container-centered">
+        <%if (locals.data) {%> <% data.forEach(function(product) { %>
+        <div class="product-card">
+          <a href="product/<%= product.id %>">
+            <div class="product-image">
+              <img
+                src="<%= encodeURI(product.imagePath) %>"
+                alt="<%= product.name %>"
+              />
+            </div>
+            <div class="product-name"><span><%= product.name %></span></div></a
+          >
+          <div class="product-price">
+            <span>R$ <%= product.price %></span>
+            <form action="/cart/<%= product.productId %>" method="post">
+              <button class="cart-button" type="submit">Comprar</button>
+            </form>
+          </div>
+        </div>
+        <% });} %>
       </div>
     </main>
     <footer><%- include('./partials/footer'); %></footer>

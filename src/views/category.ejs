@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('./partials/head'); %>
+    <link href="/stylesheets/index.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <header><%- include('./partials/header'); %></header>
+    <main>
+      <div>
+        <h1>
+          <button class="back-button" onclick="history.back()">&#8701;</button
+          ><%= title %>
+        </h1>
+        <h2>
+          <%if (locals.category) {%><%= category %><%} else {%>
+          <div class="section-heading">
+            <h2>Escolha o seu próximo acessório gamer</h2>
+          </div>
+          <%}%>
+        </h2>
+        <div class="category-container">
+          <%if (locals.data) {%> <% data.forEach(function(category) { %>
+          <a href="category/<%= category.name.toLowerCase() %>">
+            <div class="category-banner">
+              <div class="category-image">
+                <img
+                  src="<%= encodeURI(category.imagePath) %>"
+                  alt="<%= category.name %>"
+                />
+              </div>
+              <div class="category-name">
+                <span><%= category.name %></span>
+              </div>
+            </div>
+          </a>
+          <% });} %>
+        </div>
+      </div>
+    </main>
+    <footer><%- include('./partials/footer'); %></footer>
+  </body>
+</html>

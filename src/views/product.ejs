@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('./partials/head'); %>
+    <link href="/stylesheets/product.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <header><%- include('./partials/header'); %></header>
+    <main>
+      <%if (locals.data) {%>
+      <div class="breadcrumb">
+        <span class="breadcumb-pre">Você está em:</span>
+        <a
+          class="breadcrumb-link"
+          href="/category"
+          >Categorias ></a
+        >
+        <a
+          class="breadcrumb-link"
+          href="/category/<%= data.category.toLowerCase() %>"
+          ><%= data.category %> ></a
+        >
+        <span class="breadcumb-now">Código: <%= data.id %></span>
+      </div>
+      <div class="product-heading">
+        <h1>
+          <button class="back-button" onclick="history.back()">&#8701;</button
+          ><%= data.name %></h1>
+      </div>
+      <div class="container">
+        <div class="left-column">
+          <img src="<%= encodeURI(data.imagePath) %>" alt="<%= data.name %>" />
+        </div>
+        <div class="right-column">
+          <div class="product-info">
+            <span class="green-text">Em estoque!</span> </br>Vendido e entregue pela
+            nossa loja
+          </div>
+          <div class="product-price">
+            <span>R$ <%= data.price %></span>
+            <form action="/cart/<%= data.productId %>" method="post">
+              <button class="cart-btn" type="submit">COMPRAR</button>
+            </form>
+          </div>
+          <%if (locals.relatedProducts.length != 0) {%>
+            <div class="related-product-info">
+              <p>Produtos similares</p>
+            </div>
+            <div class="related-product-container">
+            <% relatedProducts.forEach(function(product) { %>
+              <div class="related-product-card">
+                <a href="/product/<%= product.id %>">
+                  <div class="related-product-image">
+                    <img
+                      src="<%= encodeURI(product.imagePath) %>"
+                      alt="<%= product.name %>"
+                    />
+                  </div>
+                  <div class="related-product-name"><span><%= product.name %></span></div></a
+                >
+                <div class="related-product-price">
+                  <span>R$ <%= product.price %></span>
+                </div>
+              </div>
+            <% })%>
+            </div>
+          <%} %>
+        </div>
+      </div>
+      <div class="product-description">
+        <h2>Descrição</h2>
+        <span><%= data.description %></span>
+      </div>
+      <% }; %>
+    </main>
+    <footer><%- include('./partials/footer'); %></footer>
+  </body>
+</html>

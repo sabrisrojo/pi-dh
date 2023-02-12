@@ -1,9 +1,27 @@
 const express = require("express")
 const session = require("express-session")
+const {
+  getAllCategories,
+  getThreeCategoriesAtRandom,
+  getFiveProductsAtRandom,
+} = require("../database/models/models")
+const productsFromFolder = require("../utils/dataImportFromFiles")
+const {
+  isUserLoggedIn,
+  retrieveUserSession,
+} = require("../utils/validation/userLoggedIn")
 
 const index = {
-  get: function (req, res) {
-    res.render("index", { title: "Index" })
+  get: async function (req, res) {
+    const categories = await getThreeCategoriesAtRandom()
+    const data = await getFiveProductsAtRandom()
+    const userData = await retrieveUserSession(req)
+    res.render("index", {
+      title: "Home",
+      categories: categories,
+      data: data,
+      userData: userData,
+    })
   },
   post: function (req, res) {
     console.log(req.body)
@@ -59,4 +77,23 @@ const sessions = {
   },
 }
 
-module.exports = { index, cookies, sessions }
+const products = {
+  get: function (req, res) {
+    res.send(productsFromFolder)
+  },
+  post: function (req, res) {
+    req.session.lastAccessSession = new Date()
+    console.log(req.session.lastAccessSession)
+    res.send(req.session.lastAccessSession)
+  },
+  put: function (req, res) {
+    res.send("PUT request to the cookies")
+  },
+  delete: function (req, res) {
+    req.session.lastAccessSession = null
+    console.log(req.session.lastAccessSession)
+    res.send(req.session.lastAccessSession)
+  },
+}
+
+module.exports = { index, cookies, sessions, products }
