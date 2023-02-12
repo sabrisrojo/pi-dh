@@ -21,4 +21,6 @@ router.post("/session", indexController.sessions.post)
 router.put("/session", indexController.sessions.put)
 router.delete("/session", indexController.sessions.delete)
 
+router.get("/api/products", indexController.products.get)
+
 module.exports = router
