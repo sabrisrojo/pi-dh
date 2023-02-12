@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('./partials/head'); %>
+    <link href="/stylesheets/profile.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <header><%- include('./partials/header'); %></header>
+    <main>
+      <div class="container">
+        <div class="card">
+          <div class="card-flex-heading">
+            <h2 class="card-heading">Perfil</h2>
+            <img
+              src="<%if (locals.userData && userData.avatar) {%><%= userData.avatar %><%}%>"
+              alt="avatar"
+              class="avatar"
+            />
+          </div>
+          <form
+            method="post"
+            action="/users/image"
+            enctype="multipart/form-data"
+          >
+            <div class="card-flex-heading">
+              <div class="input">
+                <input
+                  type="file"
+                  name="avatar"
+                  id="avatar"
+                  value="<%if (locals.old && old.avatar) {%><%= old.avatar %><%}%>"
+                />
+                <% if (locals.errors && errors.avatar) { %>
+                <div class="error-message"><%= errors.avatar.msg %></div>
+                <% } %>
+              </div>
+              <div class="action-small">
+                <button class="action-button-small">Upload</button>
+              </div>
+            </div>
+            <% if (locals.errors && errors.validation) { %>
+            <div class="error-message text-center">
+              <%= errors.validation.msg %>
+            </div>
+            <% } %>
+          </form>
+          <form
+            class="card-form"
+            method="post"
+            action="/users/profile?_method=PUT"
+          >
+            <div class="input">
+              <input
+                type="text"
+                class="input-field disabled"
+                name="username"
+                id="username"
+                required
+                readonly
+                value="<%if (locals.userData && userData.username) {%><%= userData.username %><%}%>"
+              />
+              <label class="input-label">Usuário</label>
+            </div>
+            <% if (locals.errors && errors.username) { %>
+            <div class="error-message"><%= errors.username.msg %></div>
+            <% } %>
+            <div class="input">
+              <input
+                type="text"
+                class="input-field"
+                name="email"
+                id="email"
+                required
+                readonly
+                value="<%if (locals.userData && userData.email) {%><%= userData.email %><%}%>"
+              />
+              <label class="input-label">Email</label>
+            </div>
+            <% if (locals.errors && errors.email) { %>
+            <div class="error-message"><%= errors.email.msg %></div>
+            <% } %>
+            <div class="input">
+              <input
+                type="text"
+                class="input-field"
+                name="firstName"
+                id="firstName"
+                required
+                value="<%if (locals.userData && userData.firstName) {%><%= userData.firstName %><%}%>"
+              />
+              <label class="input-label">Primeiro Nome</label>
+            </div>
+            <% if (locals.errors && errors.firstName) { %>
+            <div class="error-message"><%= errors.firstName.msg %></div>
+            <% } %>
+            <div class="input">
+              <input
+                type="text"
+                class="input-field"
+                name="lastName"
+                id="lastName"
+                required
+                value="<%if (locals.userData && userData.lastName) {%><%= userData.lastName %><%}%>"
+              />
+              <label class="input-label">Sobrenome</label>
+            </div>
+            <% if (locals.errors && errors.lastName) { %>
+            <div class="error-message"><%= errors.lastName.msg %></div>
+            <% } %>
+            <div class="input">
+              <input
+                type="text"
+                class="input-field"
+                name="shippingAddress"
+                id="shippingAddress"
+                required
+                value="<%if (locals.userData && userData.shippingAddress) {%><%= userData.shippingAddress %><%}%>"
+              />
+              <label class="input-label">Endereço de Entrega</label>
+            </div>
+            <% if (locals.errors && errors.shippingAddress) { %>
+            <div class="error-message"><%= errors.shippingAddress.msg %></div>
+            <% } %>
+            <div class="input">
+              <input
+                type="text"
+                class="input-field"
+                name="shippingCity"
+                id="shippingCity"
+                required
+                value="<%if (locals.userData && userData.shippingCity) {%><%= userData.shippingCity %><%}%>"
+              />
+              <label class="input-label">Cidade</label>
+            </div>
+            <% if (locals.errors && errors.shippingCity) { %>
+            <div class="error-message"><%= errors.shippingCity.msg %></div>
+            <% } %>
+            <div class="action">
+              <button class="action-button">Salvar</button>
+            </div>
+            <% if (locals.errors && errors.validation) { %>
+            <div class="error-message text-center">
+              <%= errors.validation.msg %>
+            </div>
+            <% } %>
+          </form>
+        </div>
+      </div>
+    </main>
+    <footer><%- include('./partials/footer'); %></footer>
+  </body>
+</html>
