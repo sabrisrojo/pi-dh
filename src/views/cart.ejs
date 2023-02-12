@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('./partials/head'); %>
+    <link href="/stylesheets/cart.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <header><%- include('./partials/header'); %></header>
+    <main>
+      <div>
+        <h1>
+          <button class="back-button" onclick="history.back()">&#8701;</button
+          ><%= title %>
+        </h1>
+        <div class="cart-container">
+          <%if (locals.cartData.length != 0) {%> <%
+          cartData.forEach(function(product) { %>
+          <div class="cart-product-container">
+            <div class="cart-product-image">
+              <img
+                src="<%= encodeURI(product.imagePath) %>"
+                alt="<%= product.name %>"
+              />
+            </div>
+            <div class="cart-product-details">
+              <div class="cart-product-category"><%= product.category %></div>
+              <div class="cart-product-name"><%= product.name %></div>
+              <a href="/product/<%= product.id %>">Ver página do produto</a>
+            </div>
+            <div class="cart-product-quantity">
+              <form
+                action="/cart/<%= product.productId %>/quantity?_method=DELETE"
+                method="post"
+              >
+                <button type="submit">-</button>
+              </form>
+              <span><%= product.quantity %></span>
+              <form
+                action="/cart/<%= product.productId %>/quantity?_method=PUT"
+                method="post"
+              >
+                <button type="submit">+</button>
+              </form>
+            </div>
+            <div class="cart-product-price">R$ <%= product.price %></div>
+            <div class="cart-product-quantity">
+              <div class="cart-product-delete">
+                <form
+                  action="/cart/<%= product.productId %>?_method=DELETE"
+                  method="POST"
+                >
+                  <button type="submit">x</button>
+                </form>
+              </div>
+            </div>
+          </div>
+          <% });} else { %>
+          <div class="cart-empty-message">
+            <div>Poxa, seu carrinho está vazio!</div>
+            <div>Que tal dar uma olhada em algo <a href="/">novo</a>?</div>
+          </div>
+          <% } %>
+        </div>
+        <%if (locals.totalPrice) { %>
+        <div class="cart-footer">
+          <div>
+            <div class="cart-footer-text">Total</div>
+            <div class="cart-footer-value">R$ <%= totalPrice.toFixed(2) %></div>
+          </div>
+        </div>
+        <form action="/cart" method="POST">
+          <div class="action">
+            <button class="action-button">Iniciar Compra</button>
+          </div>
+        </form>
+        <% } %>
+      </div>
+    </main>
+    <footer><%- include('./partials/footer'); %></footer>
+  </body>
+</html>

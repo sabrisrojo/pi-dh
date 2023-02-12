@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('./partials/head'); %>
+    <link href="/stylesheets/cart.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <header><%- include('./partials/header'); %></header>
+    <main>
+      <div>
+        <h1>
+          <button class="back-button" onclick="history.back()">&#8701;</button
+          ><%= title %>
+        </h1>
+        <%if (locals.preCart) {%>
+        <div class="cart-container">
+          <div class="cart-product-container">
+            <div class="cart-product-image">
+              <img
+                src="<%= encodeURI(preCart.imagePath) %>"
+                alt="<%= preCart.name %>"
+              />
+            </div>
+            <div class="cart-product-details">
+              <div class="cart-product-category"><%= preCart.category %></div>
+              <div class="cart-product-name"><%= preCart.name %></div>
+            </div>
+
+            <div class="cart-product-price">R$ <%= preCart.price %></div>
+          </div>
+        </div>
+        <% }%>
+      </div>
+      <div class="cart-success-container">
+        <div class="cart-success-message">
+          Produto adicionado ao carrinho com sucesso!
+        </div>
+        <span>
+          <a href="/">
+            <button type="submit" class="cart-success-button-outline">
+              Continuar comprando
+            </button></a
+          >
+          <a href="/cart">
+            <button type="submit" class="cart-success-button">
+              Ir para o carrinho
+            </button>
+          </a>
+        </span>
+      </div>
+    </main>
+    <footer><%- include('./partials/footer'); %></footer>
+  </body>
+</html>
