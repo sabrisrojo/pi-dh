@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('./partials/head'); %>
+    <link href="/stylesheets/cart.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <header><%- include('./partials/header'); %></header>
+    <main>
+      <div>
+        <h1>
+          <button class="back-button" onclick="history.back()">&#8701;</button
+          >Pedido #<%= orderDetail.order.id %>
+        </h1>
+        <div class="cart-container">
+          <div class="cart-empty-message">
+            <div class="cart-success-message">
+              Opa, tudo certo. Agora é com a gente!
+            </div>
+            <div>
+              Seu pedido já está sendo processado e será entregue no endereço
+              informado
+            </div>
+            <br />
+            <div>Agradecemos a sua preferência!</div>
+            <br />
+            <div>
+              <small>
+                E se esqueceu de alguma coisa, é só fazer
+                <a href="/">um novo pedido</a> :)</small
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer><%- include('./partials/footer'); %></footer>
+  </body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('./partials/head'); %>
+    <link href="/stylesheets/history.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <header><%- include('./partials/header'); %></header>
+    <main>
+      <h1>
+        <button class="back-button" onclick="history.back()">&#8701;</button
+        >Pedido #<%= locals.orderDetail.order.id %>
+      </h1>
+      <div class="history-container">
+        <div class="stepper">
+          <div class="step active">1 - Envio</div>
+          <div class="step-line"></div>
+          <div class="step disabled">2 - Pagamento</div>
+          <div class="step-line"></div>
+          <div class="step disabled">3 - Confirmação</div>
+        </div>
+        <%if (locals.orderDetail.length != 0) {%>
+        <div class="history-product-container">
+          <table>
+            <tr>
+              <th class="past">Id do Pedido</th>
+              <th class="past">Preço</th>
+              <th class="past">Pedido Realizado em</th>
+              <th class="past">Status do Pedido</th>
+            </tr>
+            <tr>
+              <td>#<%= orderDetail.order.id %></td>
+              <td>R$ <%= orderDetail.order.total %></td>
+              <td><%= orderDetail.order.createdAt.toLocaleString() %></td>
+              <td><%= orderDetail.order.status %></td>
+            </tr>
+          </table>
+        </div>
+        <div class="card-container">
+          <form
+            class="card-form"
+            method="post"
+            action="/users/history/<%= orderDetail.order.id %>/shipping?_method=PUT"
+          >
+            <div class="card-heading">
+              <small>
+                Para garantir a entrega correta dos seus produtos, preencha o
+                formulário abaixo e confira os detalhes do seu pedido</small
+              >
+            </div>
+            <input
+              type="hidden"
+              name="orderId"
+              value="<%= orderDetail.order.orderId %>"
+            />
+            <div class="input">
+              <input
+                type="text"
+                class="input-field"
+                name="shippingAddress"
+                id="shippingAddress"
+                required
+                value="<%if (locals.orderDetail && orderDetail.order.shippingAddress) {%><%=  orderDetail.order.shippingAddress %><%} else if (userData.shippingAddress) {%> <%= userData.shippingAddress %><%}%>"
+              />
+              <label class="input-label">Endereço de Entrega</label>
+            </div>
+            <% if (locals.errors && errors.shippingAddress) { %>
+            <div class="error-message"><%= errors.shippingAddress.msg %></div>
+            <% } %>
+            <div class="input">
+              <input
+                type="text"
+                class="input-field"
+                name="shippingCity"
+                id="shippingCity"
+                required
+                value="<%if (locals.orderDetail && orderDetail.order.shippingCity) {%><%=  orderDetail.order.shippingCity %><%} else if (userData.shippingCity) {%> <%= userData.shippingCity %><%}%>"
+              />
+              <label class="input-label">Cidade do Destinatário</label>
+            </div>
+            <% if (locals.errors && errors.shippingCity) { %>
+            <div class="error-message"><%= errors.shippingCity.msg %></div>
+            <% } %>
+            <div class="input">
+              <input
+                type="text"
+                class="input-field"
+                name="shippingRecipient"
+                id="shippingRecipient"
+                required
+                value="<%if (locals.orderDetail && orderDetail.order.shippingRecipient) {%><%=  orderDetail.order.shippingRecipient %><%} else if (userData.shippingRecipient) {%> <%= userData.shippingRecipient %><%}%>"
+              />
+              <label class="input-label">Nome do Destinatário</label>
+            </div>
+            <div class="radio-picker-label">Tipo de Entrega</div>
+            <div class="radio-picker-horizontal">
+              <% if (!orderDetail.order.expressShipping) { %>
+              <div>
+                <input
+                  type="radio"
+                  id="expressa"
+                  name="expressShipping"
+                  value="true"
+                />
+                <label for="expressa">Expressa (3 a 5 dias úteis)</label>
+              </div>
+              <br />
+              <div>
+                <input
+                  type="radio"
+                  id="economica"
+                  name="expressShipping"
+                  value="false"
+                  checked
+                />
+                <label for="economica">Econômica (4 a 10 dias úteis)</label>
+              </div>
+              <% } else { %>
+              <div>
+                <input
+                  type="radio"
+                  id="expressa"
+                  name="expressShipping"
+                  value="true"
+                  checked
+                />
+                <label for="expressa">Expressa (3 a 5 dias úteis)</label>
+              </div>
+              <br />
+              <div>
+                <input
+                  type="radio"
+                  id="economica"
+                  name="expressShipping"
+                  value="false"
+                />
+                <label for="economica">Econômica (4 a 10 dias úteis)</label>
+              </div>
+              <% } %>
+            </div>
+
+            <div class="action">
+              <button class="action-button">Confirmar Pedido</button>
+            </div>
+            <% if (locals.errors && errors.validation) { %>
+            <div class="error-message text-center">
+              <%= errors.validation.msg %>
+            </div>
+            <% } %>
+          </form>
+        </div>
+        <% ;} else { %>
+        <div class="no-data-container">
+          <div class="no-data-message">
+            <div>Parece que você não fez nenhum pedido ainda!</div>
+            <div>Vamos escolher algo <a href="/">novo</a>?</div>
+          </div>
+        </div>
+        <% } %>
+      </div>
+    </main>
+    <footer><%- include('./partials/footer'); %></footer>
+  </body>
+</html>

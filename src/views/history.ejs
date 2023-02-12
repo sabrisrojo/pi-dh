@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('./partials/head'); %>
+    <link href="/stylesheets/history.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <header><%- include('./partials/header'); %></header>
+    <main>
+      <div>
+        <h1>
+          <button class="back-button" onclick="history.back()">&#8701;</button
+          ><%= title %>
+        </h1>
+        <div class="history-container">
+          <%if (locals.userOrders.length != 0) {%>
+          <div class="history-product-container">
+            <table>
+              <tr>
+                <th>Id do Pedido</th>
+                <th>Preço</th>
+                <th>Realizado em</th>
+                <th>Status</th>
+                <th>Detalhes</th>
+              </tr>
+              <% userOrders.forEach(function(order) { %>
+              <tr>
+                <td>#<%= order.id %></td>
+                <td>R$ <%= order.total %></td>
+                <td><%= order.createdAt.toLocaleString() %></td>
+                <td><%= order.status %></td>
+                <td>
+                  <% if (order.statusId === 1) { %>
+                  <a href="/users/history/<%= order.id %>/shipping"
+                    >Informações Pendentes</a
+                  >
+                  <% } else if (order.statusId === 2) { %>
+                  <a href="/users/history/<%= order.id %>/payment"
+                    >Pagamento Pendente</a
+                  >
+                  <% } else if (order.statusId === 3) { %>
+                  <a href="/users/history/<%= order.id %>/review"
+                    >Confirmação Pendente</a
+                  >
+                  <% } else {%>
+                  <a href="/users/history/<%= order.id %>">Ver Pedido</a>
+                  <% } %>
+                </td>
+              </tr>
+              <% }) %>
+            </table>
+          </div>
+          <% ;} else { %>
+          <div class="no-data-container">
+            <div class="no-data-message">
+              <div>Parece que você não fez nenhum pedido ainda!</div>
+              <div>Vamos escolher algo <a href="/">novo</a>?</div>
+            </div>
+          </div>
+          <% } %>
+        </div>
+      </div>
+    </main>
+    <footer><%- include('./partials/footer'); %></footer>
+  </body>
+</html>

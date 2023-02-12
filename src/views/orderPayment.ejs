@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('./partials/head'); %>
+    <link href="/stylesheets/history.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <header><%- include('./partials/header'); %></header>
+    <main>
+      <h1>
+        <button class="back-button" onclick="history.back()">&#8701;</button
+        >Pedido #<%= locals.orderDetail.order.id %>
+      </h1>
+      <div class="history-container">
+        <div class="stepper">
+          <a href="/users/history/<%= orderDetail.order.id %>/shipping">
+            <div class="step past">1 - Envio</div></a
+          >
+          <div class="step-line"></div>
+          <div class="step active">2 - Pagamento</div>
+          <div class="step-line"></div>
+          <div class="step disabled">3 - Confirmação</div>
+        </div>
+        <%if (locals.orderDetail.length != 0) {%>
+        <div class="history-product-container">
+          <table>
+            <tr>
+              <th class="past">Id do Pedido</th>
+              <th class="past">Preço</th>
+              <th class="past">Tipo de Entrega</th>
+              <th class="past">Status</th>
+            </tr>
+            <tr>
+              <td>#<%= orderDetail.order.id %></td>
+              <td>R$ <%= orderDetail.order.total %></td>
+              <td>
+                <%= orderDetail.order.expressShipping ? "Expressa" : "Ecônomica"
+                %>
+              </td>
+              <td><%= orderDetail.order.status %></td>
+            </tr>
+          </table>
+        </div>
+        <div class="history-product-container">
+          <table>
+            <tr>
+              <th class="past">Nome do Destinatário</th>
+              <th class="past">Endereço de Entrega</th>
+              <th class="past">Cidade</th>
+              <th class="past">Estimativa de Entrega</th>
+            </tr>
+            <tr>
+              <td><%= orderDetail.order.shippingRecipient %></td>
+              <td><%= orderDetail.order.shippingAddress %></td>
+              <td><%= orderDetail.order.shippingCity %></td>
+              <td>
+                <%= orderDetail.order.expressShipping ? `3 a 5 dias úteis` : `4
+                a 10 dias úteis` %>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="card-container-row">
+          <form
+            class="card-form"
+            method="post"
+            action="/users/history/<%= orderDetail.order.id %>/payment?_method=PUT"
+          >
+            <div class="card-heading">
+              Escolha seu método de pagamento preferido abaixo.
+              <br />
+            </div>
+            <small
+              >Todos os pedidos pagos na forma de pagamento via Débito recebem
+              10% de desconto
+            </small>
+            <input
+              type="hidden"
+              name="orderId"
+              value="<%= orderDetail.order.orderId %>"
+            />
+
+            <div class="radio-picker-horizontal">
+              <div class="radio-picker-label-horizontal">Tipo de Pagamento</div>
+              <% if (orderDetail.order.creditCardPayment) { %>
+              <div>
+                <input
+                  type="radio"
+                  id="expressa"
+                  name="creditCardPayment"
+                  value="true"
+                  checked
+                />
+                <label for="expressa">Crédito</label>
+              </div>
+              <br />
+              <div>
+                <input
+                  type="radio"
+                  id="economica"
+                  name="creditCardPayment"
+                  value="false"
+                />
+                <label for="economica">Débito</label>
+              </div>
+              <% } else { %>
+              <div>
+                <input
+                  type="radio"
+                  id="expressa"
+                  name="creditCardPayment"
+                  value="true"
+                />
+                <label for="expressa">Crédito</label>
+              </div>
+              <br />
+              <div>
+                <input
+                  type="radio"
+                  id="economica"
+                  name="creditCardPayment"
+                  value="false"
+                  checked
+                />
+                <label for="economica">Débito</label>
+              </div>
+              <% } %>
+            </div>
+
+            <div class="action">
+              <button class="action-button">Confirmar e Revisar Pedido</button>
+            </div>
+            <% if (locals.errors && errors.validation) { %>
+            <div class="error-message text-center">
+              <%= errors.validation.msg %>
+            </div>
+            <% } %>
+          </form>
+          <form>
+            <div class="card-form payment-details">
+              <div class="payment-heading">Sub Total</div>
+              <strong class="text-primary size-big"
+                >R$ <%= orderDetail.order.total %></strong
+              >
+              <div>Entrega: + R$ <%= orderDetail.order.shippingCost %></div>
+              <br />
+              <div class="payment-heading">Total</div>
+              <div>
+                <strong class="size-big"
+                  >Débito:
+                  <span class="green-text"
+                    >R$ <%= ((orderDetail.order.subTotal) * 0.9).toFixed(2)
+                    %></span
+                  ></strong
+                >
+              </div>
+              <div>ou</div>
+              <div>
+                <strong class="size-medium"
+                  >Crédito:
+                  <span class="green-text"
+                    >R$ <%= (orderDetail.order.subTotal) %></span
+                  ></strong
+                >
+              </div>
+            </div>
+          </form>
+        </div>
+        <% } %>
+      </div>
+    </main>
+    <footer><%- include('./partials/footer'); %></footer>
+  </body>
+</html>

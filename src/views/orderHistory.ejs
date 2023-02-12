@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('./partials/head'); %>
+    <link href="/stylesheets/history.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <header><%- include('./partials/header'); %></header>
+    <main>
+      <h1>
+        <button class="back-button" onclick="history.back()">&#8701;</button
+        >Pedido #<%= locals.orderDetail.order.id %>
+      </h1>
+      <div class="history-container">
+        <%if (locals.orderDetail.length != 0) {%>
+        <div class="history-product-container">
+          <table>
+            <tr>
+              <th>Id do Pedido</th>
+              <th>Preço</th>
+              <th>Tipo de Entrega</th>
+              <th>Status</th>
+            </tr>
+            <tr>
+              <td>#<%= orderDetail.order.id %></td>
+              <td>R$ <%= orderDetail.order.total %></td>
+              <td>
+                <%= orderDetail.order.expressShipping ? "Expressa" : "Ecônomica"
+                %>
+              </td>
+              <td><%= orderDetail.order.status %></td>
+            </tr>
+          </table>
+        </div>
+        <div class="history-product-container">
+          <table>
+            <tr>
+              <th class="alt">Nome do Destinatário</th>
+              <th class="alt">Endereço de Entrega</th>
+              <th class="alt">Cidade</th>
+              <th class="alt">Estimativa de Entrega</th>
+            </tr>
+            <tr>
+              <td><%= orderDetail.order.shippingRecipient %></td>
+              <td><%= orderDetail.order.shippingAddress %></td>
+              <td><%= orderDetail.order.shippingCity %></td>
+              <td>
+                <%= orderDetail.order.expressShipping ? `3 a 5 dias úteis` : `4
+                a 10 dias úteis` %>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="history-product-container">
+          <table>
+            <tr>
+              <th class="dark">Método de Pagamento</th>
+              <th class="dark">Valor Total do Pedido</th>
+            </tr>
+            <tr>
+              <td>
+                <%= orderDetail.order.creditCardPayment ? `Crédito` : `Débito`
+                %>
+              </td>
+              <td>
+                <strong>R$ <%= orderDetail.order.orderFinalTotal %></strong>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="card-heading">Produtos</div>
+        <div class="history-product-container">
+          <table>
+            <tr>
+              <th class="alt">Nome</th>
+              <th class="alt">Quantidade</th>
+              <th class="alt">Preço</th>
+              <th class="alt">Total</th>
+              <th class="alt">Anúncio</th>
+            </tr>
+            <% orderDetail.productsData.forEach(function(product) { %>
+            <tr>
+              <td><%= product.name %></td>
+              <td><%= product.quantity %></td>
+              <td>R$ <%= product.price %></td>
+              <td><%= (product.quantity * product.price).toFixed(2) %></td>
+              <td><a href="/product/<%= product.id %>">Ver</a></td>
+            </tr>
+            <% }) %>
+          </table>
+          <% } %>
+        </div>
+      </div>
+    </main>
+    <footer><%- include('./partials/footer'); %></footer>
+  </body>
+</html>
