@@ -28,5 +28,5 @@ Backlight RGB
 Formato 60%
 Ideal para setups minimalistas. Design compacto e toda funcionalidade dos teclados comuns. O teclado conta também com Layout ABNT2 para facilitar seu dia-a-dia.
 
-#Keyboards
+#Teclados
 #R$ 279,99

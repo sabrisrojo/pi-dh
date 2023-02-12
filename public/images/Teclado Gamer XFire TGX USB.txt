@@ -5,5 +5,5 @@ Teclas retro iluminadas com três níveis de brilho
 Velocidade de processamento até 80% maior
 Iluminação de fundo e lateral
 
-#Keyboards
+#Teclados
 #R$ 42,90
