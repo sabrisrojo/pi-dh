@@ -4,24 +4,24 @@ const validateRegister = [
   body("username")
     .not()
     .isEmpty()
-    .withMessage("Username is required")
+    .withMessage("Username é necessário")
     .bail()
     .isLength({ min: 3 })
-    .withMessage("Username is at least 3 chars long"),
+    .withMessage("Usuário precisa ter mais de 3 caractéres"),
   body("email")
     .not()
     .isEmpty()
-    .withMessage("Email is required")
+    .withMessage("Email é necessário")
     .bail()
     .isEmail()
-    .withMessage("Email is invalid"),
+    .withMessage("Digite um email válido"),
   body("password")
     .not()
     .isEmpty()
-    .withMessage("Password is required")
+    .withMessage("Senha é necessário")
     .bail()
     .isLength({ min: 6 })
-    .withMessage("Password is at least 6 chars long"),
+    .withMessage("Senha precisa ter mais de 6 caractéres"),
 ]
 
 module.exports = validateRegister

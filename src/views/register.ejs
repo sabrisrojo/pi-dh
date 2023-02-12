@@ -2,54 +2,75 @@
 <html>
   <head>
     <%- include('./partials/head'); %>
+    <link href="/stylesheets/login.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
-    <header><%- include('./partials/header'); %></header>
-    <main>
-      <h1><%= title %></h1>
-      <form method="post" action="/users/register">
-        <p>
-          <label for="username">Username:</label>
-          <input
-            type="text"
-            name="username"
-            id="username"
-            value="<%if (locals.old && old.username) {%><%= old.username %><%}%>"
-          />
-            <% if (locals.errors && errors.username) { %>
-            <div><%= errors.username.msg %></div>
-            <% } %>
-        </p>
-        <p>
-          <label for="email">Email:</label>
-          <input
-            type="text"
-            name="email"
-            id="email"
-            value="<%if (locals.old && old.email) {%><%= old.email %><%}%>"
-          />
-            <% if (locals.errors && errors.email) { %>
-            <div><%= errors.email.msg %></div>
-            <% } %>
-        </p>
-        <p>
-          <label for="password">Password:</label>
-          <input
-            type="text"
-            name="password"
-            id="password"
-            value="<%if (locals.old && old.password) {%><%= old.password %><%}%>"
-          />
-            </div>
-            <% if (locals.errors && errors.password) { %>
-            <div><%= errors.password.msg %></div>
-            <% } %>
-        </p>
-        <p>
-          <input type="submit" value="Login" />
-        </p>
-      </form>
-    </main>
+    <div class="container">
+      <div class="logo">
+        <a href="/"
+          ><img src="/images/logo.jpg" alt="avatar" class="avatar"
+        /></a>
+      </div>
+      <div class="card">
+        <h2 class="card-heading">
+          Registrar
+          <small>Insira suas informações abaixo</small>
+        </h2>
+        <form class="card-form" method="post" action="/users/register">
+          <div class="input">
+            <input
+              type="text"
+              class="input-field"
+              name="username"
+              id="username"
+              required
+              value="<%if (locals.old && old.username) {%><%= old.username %><%}%>"
+            />
+            <label class="input-label">Usuário</label>
+          </div>
+          <% if (locals.errors && errors.username) { %>
+          <div class="error-message"><%= errors.username.msg %></div>
+          <% } %>
+          <div class="input">
+            <input
+              type="text"
+              class="input-field"
+              name="email"
+              id="email"
+              required
+              value="<%if (locals.old && old.email) {%><%= old.email %><%}%>"
+            />
+            <label class="input-label">Email</label>
+          </div>
+          <% if (locals.errors && errors.email) { %>
+          <div class="error-message"><%= errors.email.msg %></div>
+          <% } %>
+          <div class="input">
+            <input
+              type="text"
+              class="input-field"
+              name="password"
+              id="password"
+              required
+              value="<%if (locals.old && old.password) {%><%= old.password %><%}%>"
+            />
+            <label class="input-label">Senha</label>
+          </div>
+          <% if (locals.errors && errors.password) { %>
+          <div class="error-message"><%= errors.password.msg %></div>
+          <% } %>
+          <div class="action">
+            <button class="action-button">Registrar</button>
+          </div>
+        </form>
+        <div class="card-info">
+          <p>
+            Já tem uma conta?
+            <a href="/users/login">Login</a>
+          </p>
+        </div>
+      </div>
+    </div>
     <footer><%- include('./partials/footer'); %></footer>
   </body>
 </html>

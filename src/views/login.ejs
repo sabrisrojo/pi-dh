@@ -2,41 +2,69 @@
 <html>
   <head>
     <%- include('./partials/head'); %>
+    <link href="/stylesheets/login.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
-    <header><%- include('./partials/header'); %></header>
-    <main>
-      <h1><%= title %></h1>
-      <form method="post" action="/users/login">
-        <p>
-          <label for="username">Username:</label>
-          <input
-            type="text"
-            name="username"
-            id="username"
-            value="<%if (locals.old && old.username) {%><%= old.username %><%}%>"
-          />
-            <% if (locals.errors && errors.username) { %>
-            <div class="error-message"><%= errors.username.msg %></div>
-            <% } %>
-        </p>
-        <p>
-          <label for="password">Password:</label>
-          <input
-            type="text"
-            name="password"
-            id="password"
-            value="<%if (locals.old && old.password) {%><%= old.password %><%}%>"
-          />
-            <% if (locals.errors && errors.password) { %>
-            <div class="error-message"><%= errors.password.msg %></div>
-            <% } %>
-        </p>
-        <p>
-          <input type="submit" value="Login" />
-        </p>
-      </form>
-    </main>
+    <div class="container">
+      <div class="logo">
+        <a href="/"
+          ><img src="/images/logo.jpg" alt="avatar" class="avatar"
+        /></a>
+      </div>
+      <div class="card-heading"></div>
+      <div class="card">
+        <h2 class="card-heading">
+          Log In
+          <small>Bem vindo</small>
+        </h2>
+        <form class="card-form" method="post" action="/users/login">
+          <div class="input">
+            <input
+              type="text"
+              class="input-field"
+              name="username"
+              id="username"
+              required
+              autocomplete="on"
+              value="<%if (locals.old && old.username) {%><%= old.username %><%}%>"
+            />
+            <label class="input-label">Username</label>
+          </div>
+          <% if (locals.errors && errors.username) { %>
+          <div class="error-message"><%= errors.username.msg %></div>
+          <% } %>
+          <div class="input">
+            <input
+              type="text"
+              class="input-field"
+              name="password"
+              id="password"
+              required
+              autocomplete="on"
+              value="<%if (locals.old && old.password) {%><%= old.password %><%}%>"
+            />
+            <label class="input-label">Password</label>
+          </div>
+          <% if (locals.errors && errors.password) { %>
+          <div class="error-message"><%= errors.password.msg %></div>
+          <% } %>
+          <div class="action">
+            <button class="action-button">Entrar</button>
+          </div>
+          <% if (locals.errors && errors.validation) { %>
+          <div class="error-message text-center">
+            <%= errors.validation.msg %>
+          </div>
+          <% } %>
+        </form>
+        <div class="card-info">
+          <p>
+            Não tem uma conta?
+            <a href="/users/register">Registrar</a>
+          </p>
+        </div>
+      </div>
+    </div>
     <footer><%- include('./partials/footer'); %></footer>
   </body>
 </html>

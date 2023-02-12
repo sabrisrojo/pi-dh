@@ -1,0 +1,136 @@
+body {
+  background-color: #f1f3fb;
+  padding: 0 2rem;
+}
+input {
+  appearance: none;
+  border-radius: 0;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+}
+.card {
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 425px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px 0 rgba(153, 153, 153, 0.25);
+  padding: 0.75rem;
+}
+.card-heading {
+  position: relative;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #d33e77;
+  line-height: 1.222;
+  text-align: center;
+}
+.card-heading small {
+  display: block;
+  font-size: 0.75em;
+  font-weight: 400;
+  margin-top: 0.25em;
+}
+.logo {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  z-index: 10000;
+}
+.logo > a > img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 100%;
+  background-color: #b1b1b1;
+}
+.card-form {
+  padding: 2rem 1rem 0;
+}
+.input {
+  display: flex;
+  flex-direction: column-reverse;
+  position: relative;
+  padding-top: 1.5rem;
+}
+.input + .input {
+  margin-top: 1.5rem;
+}
+.input-label {
+  color: #8597a3;
+  position: absolute;
+  top: 1.5rem;
+  transition: 0.25s ease;
+}
+.input-field {
+  border: 0;
+  z-index: 1;
+  background-color: transparent;
+  border-bottom: 2px solid #eee;
+  font: inherit;
+  font-size: 1.125rem;
+  padding: 0.25rem 0;
+}
+.input-field:focus,
+.input-field:valid {
+  outline: 0;
+  border-bottom-color: #d33e77;
+}
+.input-field:focus + .input-label,
+.input-field:valid + .input-label {
+  color: #d33e77;
+  transform: translateY(-1.5rem);
+}
+.action {
+  margin-top: 2rem;
+}
+.action-button {
+  font: inherit;
+  font-size: 1.25rem;
+  padding: 1em;
+  width: 100%;
+  font-weight: 500;
+  background-color: #d33e77;
+  border-radius: 6px;
+  color: #fff;
+  border: 0;
+  transition: 100ms;
+}
+.action-button:hover {
+  outline: 0;
+  background-color: #762242;
+}
+.card-info {
+  padding: 1rem 1rem;
+  text-align: center;
+  font-size: 0.875rem;
+  color: #8597a3;
+}
+.card-info a {
+  display: block;
+  color: #d33e77;
+  text-decoration: none;
+}
+
+.error-message {
+  color: #ff4444;
+  padding-bottom: 1rem;
+}
+
+.text-center {
+  text-align: center;
+}

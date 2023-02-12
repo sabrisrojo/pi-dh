@@ -4,17 +4,17 @@ const validateLogin = [
   body("username")
     .not()
     .isEmpty()
-    .withMessage("Username is required")
+    .withMessage("Usuário é necessário")
     .bail()
     .isLength({ min: 3 })
-    .withMessage("Username is at least 3 chars long"),
+    .withMessage("Usuário precisa ter mais de 3 caractéres"),
   body("password")
     .not()
     .isEmpty()
-    .withMessage("Password is required")
+    .withMessage("Senha é necessária")
     .bail()
     .isLength({ min: 6 })
-    .withMessage("Password is at least 6 chars long"),
+    .withMessage("Senha precisa ter mais de 6 caractéres"),
 ]
 
 module.exports = validateLogin
