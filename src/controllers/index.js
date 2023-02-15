@@ -3,8 +3,10 @@ const session = require("express-session")
 const {
   getAllCategories,
   getThreeCategoriesAtRandom,
+} = require("../database/models/services/category")
+const {
   getFiveProductsAtRandom,
-} = require("../database/models/services")
+} = require("../database/models/services/products")
 const productsFromFolder = require("../utils/dataImportFromFiles")
 const {
   isUserLoggedIn,

@@ -9,6 +9,8 @@ const {
   getUser,
   updateUserAvatar,
   getUserAvatar,
+} = require("../database/models/services/user")
+const {
   getOrders,
   getOrder,
   getProductsFromOrder,
@@ -16,7 +18,7 @@ const {
   updateOrderPaymentDetails,
   deleteOrder,
   completeOrder,
-} = require("../database/models/services")
+} = require("../database/models/services/order")
 const { hashPassword } = require("../utils/hash/password")
 const { retrieveUserSession } = require("../utils/validation/userLoggedIn")
 

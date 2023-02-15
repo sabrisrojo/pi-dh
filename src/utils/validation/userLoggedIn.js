@@ -1,4 +1,4 @@
-const { userExists } = require("../../database/models/models")
+const { userExists } = require("../../database/models/services/user")
 
 module.exports = {
   isUserLoggedIn: async function (req, res, next) {
