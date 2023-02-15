@@ -34,8 +34,8 @@
               <td>#<%= orderDetail.order.id %></td>
               <td>R$ <%= orderDetail.order.total %></td>
               <td>
-                <%= orderDetail.order.expressShipping ? "Expressa" : "Ecônomica"
-                %>
+                <%= orderDetail.order.expressShipping ? "Expressa (+ R$ 15,00)"
+                : "Ecônomica (+ R$ 5,00)" %>
               </td>
               <td><%= orderDetail.order.status %></td>
             </tr>

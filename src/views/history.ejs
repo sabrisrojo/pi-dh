@@ -20,6 +20,7 @@
                 <th>Id do Pedido</th>
                 <th>Preço</th>
                 <th>Realizado em</th>
+                <th>Valor Pago</th>
                 <th>Status</th>
                 <th>Detalhes</th>
               </tr>
@@ -28,6 +29,9 @@
                 <td>#<%= order.id %></td>
                 <td>R$ <%= order.total %></td>
                 <td><%= order.createdAt.toLocaleString() %></td>
+                <td>
+                  R$ <%= order.orderFinalTotal ? order.orderFinalTotal: `-` %>
+                </td>
                 <td><%= order.status %></td>
                 <td>
                   <% if (order.statusId === 1) { %>
