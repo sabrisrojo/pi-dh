@@ -4,7 +4,7 @@ const {
   getAllCategories,
   getThreeCategoriesAtRandom,
   getFiveProductsAtRandom,
-} = require("../database/models/models")
+} = require("../database/models/services")
 const productsFromFolder = require("../utils/dataImportFromFiles")
 const {
   isUserLoggedIn,

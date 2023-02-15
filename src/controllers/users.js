@@ -12,12 +12,11 @@ const {
   getOrders,
   getOrder,
   getProductsFromOrder,
-  updateOrder,
   updateOrderShippingDetails,
   updateOrderPaymentDetails,
   deleteOrder,
   completeOrder,
-} = require("../database/models/models")
+} = require("../database/models/services")
 const { hashPassword } = require("../utils/hash/password")
 const { retrieveUserSession } = require("../utils/validation/userLoggedIn")
 

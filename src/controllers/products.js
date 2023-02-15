@@ -5,7 +5,7 @@ const {
   getAllCategories,
   getTwoProductsOfSameCategoryAtRandom,
   searchProductsByName,
-} = require("../database/models/models")
+} = require("../database/models/services")
 const { retrieveUserSession } = require("../utils/validation/userLoggedIn")
 
 module.exports = {

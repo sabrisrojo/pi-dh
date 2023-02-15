@@ -4,7 +4,7 @@ const {
   saveCartToDatabase,
   getCartFromDatabase,
   createOrder,
-} = require("../database/models/models")
+} = require("../database/models/services")
 const { retrieveUserSession } = require("../utils/validation/userLoggedIn")
 const { getOneProductById } = require("./products")
 
