@@ -433,19 +433,6 @@ const createProduct = async (product) => {
   }
 }
 
-const userExists = async (username, email) => {
-  try {
-    const userData = await User.findOne({
-      where: {
-        [Op.or]: [{ username: username }, { email: email }],
-      },
-    })
-    return true
-  } catch (err) {
-    throw err
-  }
-}
-
 sequelize
   .query("SET FOREIGN_KEY_CHECKS = 0")
   .then(function () {
@@ -521,6 +508,4 @@ module.exports = {
   Order,
   createCategory,
   createProduct,
-  userExists,
 }
-

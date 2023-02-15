@@ -1,10 +1,11 @@
 const {
-  Product,
-  getOneProductPyProductId,
   saveCartToDatabase,
   getCartFromDatabase,
-  createOrder,
-} = require("../database/models/services")
+} = require("../database/models/services/cart")
+const { createOrder } = require("../database/models/services/order")
+const {
+  getOneProductPyProductId,
+} = require("../database/models/services/products")
 const { retrieveUserSession } = require("../utils/validation/userLoggedIn")
 const { getOneProductById } = require("./products")
 
@@ -97,7 +98,6 @@ module.exports = {
     }
     res.redirect("/cart")
   },
-  // get data from req.session.cart and save it to the database
   checkout: async (req, res) => {
     const { cart } = req.session
 
