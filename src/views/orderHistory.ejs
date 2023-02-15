@@ -25,8 +25,8 @@
               <td>#<%= orderDetail.order.id %></td>
               <td>R$ <%= orderDetail.order.total %></td>
               <td>
-                <%= orderDetail.order.expressShipping ? "Expressa" : "Ecônomica"
-                %>
+                <%= orderDetail.order.expressShipping ? "Expressa (+ R$ 15,00)"
+                : "Ecônomica (+ R$ 5,00)" %>
               </td>
               <td><%= orderDetail.order.status %></td>
             </tr>
@@ -59,8 +59,8 @@
             </tr>
             <tr>
               <td>
-                <%= orderDetail.order.creditCardPayment ? `Crédito` : `Débito`
-                %>
+                <%= orderDetail.order.creditCardPayment ? `Crédito` : `Débito
+                (-10%)` %>
               </td>
               <td>
                 <strong>R$ <%= orderDetail.order.orderFinalTotal %></strong>
