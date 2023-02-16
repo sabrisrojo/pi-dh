@@ -102,3 +102,7 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Ignorar todos os arquivos da pasta de avatars menos a imagem padrão
+public/images/avatars/*
+!public/images/avatars/default.png
