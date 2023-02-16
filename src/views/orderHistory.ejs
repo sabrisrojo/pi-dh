@@ -84,7 +84,13 @@
               <td><%= product.quantity %></td>
               <td>R$ <%= product.price %></td>
               <td><%= (product.quantity * product.price).toFixed(2) %></td>
-              <td><a href="/product/<%= product.id %>">Ver</a></td>
+              <td>
+                <a
+                  class="history-product-link"
+                  href="/product/<%= product.id %>"
+                  >Ver</a
+                >
+              </td>
             </tr>
             <% }) %>
           </table>

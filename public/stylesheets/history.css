@@ -21,6 +21,10 @@ body {
   overflow: auto;
 }
 
+.history-product-link {
+  text-decoration: underline !important;
+}
+
 table {
   border-collapse: collapse;
   width: 100%;
@@ -50,11 +54,6 @@ th {
 th.past {
   background-color: #762242;
   color: white;
-}
-
-a {
-  text-decoration: underline;
-  color: #d33e77;
 }
 
 .card-container {
