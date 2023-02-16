@@ -97,6 +97,11 @@ a {
   margin: 1em auto;
 }
 
+.category-name > a {
+  text-decoration: none;
+  color: #d33e77;
+}
+
 .category-name span {
   display: block;
   text-align: left;
@@ -154,6 +159,11 @@ a {
 .product-name {
   display: block;
   margin: 1em auto;
+}
+
+.product-name > span {
+  text-decoration: none !important;
+  color: #000 !important;
 }
 
 .product-name span {

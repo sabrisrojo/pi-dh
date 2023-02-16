@@ -28,7 +28,7 @@
               autocomplete="on"
               value="<%if (locals.old && old.username) {%><%= old.username %><%}%>"
             />
-            <label class="input-label">Username</label>
+            <label class="input-label">Usuário</label>
           </div>
           <% if (locals.errors && errors.username) { %>
           <div class="error-message"><%= errors.username.msg %></div>
@@ -43,7 +43,7 @@
               autocomplete="on"
               value="<%if (locals.old && old.password) {%><%= old.password %><%}%>"
             />
-            <label class="input-label">Password</label>
+            <label class="input-label">Senha</label>
           </div>
           <% if (locals.errors && errors.password) { %>
           <div class="error-message"><%= errors.password.msg %></div>

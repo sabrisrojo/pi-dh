@@ -35,19 +35,29 @@
                 <td><%= order.status %></td>
                 <td>
                   <% if (order.statusId === 1) { %>
-                  <a href="/users/history/<%= order.id %>/shipping"
+                  <a
+                    class="history-product-link"
+                    href="/users/history/<%= order.id %>/shipping"
                     >Informações Pendentes</a
                   >
                   <% } else if (order.statusId === 2) { %>
-                  <a href="/users/history/<%= order.id %>/payment"
+                  <a
+                    class="history-product-link"
+                    href="/users/history/<%= order.id %>/payment"
                     >Pagamento Pendente</a
                   >
                   <% } else if (order.statusId === 3) { %>
-                  <a href="/users/history/<%= order.id %>/review"
+                  <a
+                    class="history-product-link"
+                    href="/users/history/<%= order.id %>/review"
                     >Confirmação Pendente</a
                   >
                   <% } else {%>
-                  <a href="/users/history/<%= order.id %>">Ver Pedido</a>
+                  <a
+                    class="history-product-link"
+                    href="/users/history/<%= order.id %>"
+                    >Ver Pedido</a
+                  >
                   <% } %>
                 </td>
               </tr>
